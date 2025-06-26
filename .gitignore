@@ -16,3 +16,11 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+#  Terraform 
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+.terraform.tfstate.lock.info
