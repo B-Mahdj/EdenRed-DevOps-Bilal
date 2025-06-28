@@ -7,6 +7,14 @@ resource "azurerm_log_analytics_workspace" "main" {
   retention_in_days   = 30
 }
 
+resource "azurerm_application_insights" "main" {
+  name                = "${var.project_name}-appinsights"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  application_type    = "web"
+  workspace_id        = azurerm_log_analytics_workspace.main.id
+}
+
 resource "azurerm_container_app_environment" "main" {
   name                       = "${var.project_name}-env"
   location                   = var.location
@@ -30,12 +38,21 @@ resource "azurerm_container_app" "main" {
     }
   }
 
+  secret {
+    name  = "appinsights-connection-string"
+    value = azurerm_application_insights.main.connection_string
+  }
+
   template {
     container {
       name   = "${var.project_name}-app"
       image  = var.image_url
       cpu    = 0.25
       memory = "0.5Gi"
+      env {
+        name = "APPLICATIONINSIGHTS_CONNECTION_STRING"
+        secret_name = "appinsights-connection-string"
+      }
     }
   }
 }
