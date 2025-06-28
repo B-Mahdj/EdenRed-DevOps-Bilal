@@ -39,7 +39,7 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: |
-        terraform init \ 
+        terraform init \
           -backend-config="subscription_id=${ARM_SUBSCRIPTION_ID}" \
           -backend-config="tenant_id=${ARM_TENANT_ID}" \
           -backend-config="client_id=${ARM_CLIENT_ID}" \
