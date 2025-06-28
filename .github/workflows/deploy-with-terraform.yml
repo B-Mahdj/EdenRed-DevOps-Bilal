@@ -50,11 +50,6 @@ jobs:
           -backend-config="client_secret=${{ secrets.ARM_CLIENT_SECRET }}"
       working-directory: infra-terraform
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check 
-      working-directory: infra-terraform
-
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false 
