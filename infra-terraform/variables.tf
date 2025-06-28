@@ -3,12 +3,6 @@ variable "project_name" {
   default     = "edenred-devops-bilal"
 }
 
-variable "azure_subscription_id" {
-  type        = string
-  description = "Subscription id for deployment to Azure Cloud"
-  sensitive   = true
-}
-
 variable "location" {
   type        = string
   default     = "westeurope"
